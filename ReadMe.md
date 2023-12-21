@@ -3,7 +3,10 @@
 ## Worm Tracker
 
 ## Overview
-A quick and easy transit arrival checker with the ability to favorite stops and routes with a focus on mobile useage. 
+A quick and easy transit arrival checker with the ability to favorite stops and routes with a focus on mobile useage. </br>
+Utilizing 511's Transit Data API.
+
+
 
 ## Wireframes
 Sign In Flow </br>
@@ -32,9 +35,10 @@ As a user, I want the ability to...
   - remove favorites.
 
 Bonuses
-  - search bar functionality
+  - reorder favorites. 
+  - search bar functionality.
   - other transit agencies.
-  - any transit announcements.
+  - any transit announcements. (might not happen, looks like they discontinued this part of the api)
   - provide feedback.
 
 
