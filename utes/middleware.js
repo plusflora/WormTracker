@@ -11,6 +11,7 @@ const passport = require('passport')
 require('../config/passport')
 
 
+
 ///////////////////////
 // Middleware Function
 const middleware = (app) => {
@@ -18,7 +19,7 @@ const middleware = (app) => {
   app.use(morgan('tiny'))
   app.use(express.static('public'))
   app.use(express.json())
-
+  
   app.use(
     session({
       secret: process.env.SECRET,
@@ -28,12 +29,8 @@ const middleware = (app) => {
       saveUninitialized: true,
       resave: false
     })
-  )
-
-  app.use(passport.initialize())
-  app.use(passport.session())
+  )    
 }
-
 
 ///////////////////
 //Export Middleware

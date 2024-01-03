@@ -8,16 +8,16 @@ const { Schema, model } = mongoose
 //Schema definition
 
 const userSchema = new Schema({
-  name: String,
-  googleId: {
-    type: String,
-    required: true
+  username: {
+      type: String,
+      required: true,
+      unique: true
   },
-  email: String,
-  avatar: String
-}, {
-  timestamps: true
-});
+  password: {
+      type: String,
+      required: true
+  }
+})
 
 ////////////////////
 // create user model
@@ -25,4 +25,4 @@ const User = model('User', userSchema)
 
 ////////////////////////
 // export our connection
-module.exports = mongoose.model('User', userSchema);
+module.exports = User
