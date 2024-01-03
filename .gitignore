@@ -1,0 +1,6 @@
+# need to ignore
+.env
+node_modules
+# personal notes
+notes.md
+brainstormingbitch.md

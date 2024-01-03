@@ -10,19 +10,19 @@ Utilizing 511's Transit Data API.
 
 ## Wireframes
 Sign In Flow </br>
-![Sign In Flow](assets/signinWT.PNG)
+![Sign In Flow](public/assets/signinWT.PNG)
 
 Route Flow </br>
-![Route Flow](assets/routeflowWT.PNG)
+![Route Flow](public/assets/routeflowWT.PNG)
 
 Stop Flow </br>
-![Stop Flow](assets/stopflowWT.PNG)
+![Stop Flow](public/assets/stopflowWT.PNG)
 
 Favorites </br>
-![Favorites Flow](assets/favoritesflowWT.PNG)
+![Favorites Flow](public/assets/favoritesflowWT.PNG)
 
 ERD </br>
-![ERD](assets/erdWT.PNG)
+![ERD](public/assets/erdWT.PNG)
 
 ## User Stories
 As a user, I want the ability to... 
