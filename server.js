@@ -9,6 +9,7 @@ const logger = require('morgan')
 const session = require('express-session')
 const passport = require('passport')
 require('./utes/connection')
+const axios = require('axios')
 
 
 /////////////////
@@ -53,6 +54,17 @@ app.get('/error', (req, res) => {
   res.send(error)
   // res.render('error.ejs', { error, userId, username, loggedIn })
 })
+
+//page with all routes
+app.get('/routes/allroutes', async (req, res) => {
+  try {
+      const apiData = await fetchBusRoutes();
+      res.render('busRoutesPage', { routes: apiData });
+  } catch (error) {
+      console.error("Error in /routes/allroutes:", error);
+      res.status(500).send('Error fetching bus routes');
+  }
+});
 
 //OAuth Routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}))

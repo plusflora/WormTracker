@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+
+
+<h1>Placeholder</h1>
+
+<div class="container">
+  <h1>Bus Routes</h1>
+  <ul>
+    <% routes.forEach(route => { %>
+        <li><%= route.name %> (ID: <%= route.id %>)</li>
+    <% }); %>
+  </ul>
+</div>
+
+<%- include('../partials/footer') %>
