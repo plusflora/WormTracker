@@ -8,8 +8,6 @@ const mongoose = require('mongoose');
 const DATABASE_URL = process.env.DATABASE_URL;
 
 
-console.log(' THIS IS DATABASE URL INSIDE utes/connection.js:', DATABASE_URL); //REMOVE THIS BEFORE COMMITING
-
 // Here is our DB config object
 const CONFIG = {
     useNewUrlParser: true,
