@@ -16,6 +16,7 @@ const axios = require('axios')
 // Import Routers
 const UserRouter = require('./controllers/userControllers')
 
+const fetchBusRoutes = require('./utes/busRoutes')
 
 //////////////////////////////////////////////////
 //create the app object and set up the view engine
@@ -34,6 +35,8 @@ app.use(express.urlencoded({ extended: true })); // This needs to be before your
 ////////////
 //middleware
 middleware(app)
+
+
 
 require('./config/passport')
 ////////
@@ -58,14 +61,13 @@ app.get('/error', (req, res) => {
 //page with all routes
 app.get('/routes/allroutes', async (req, res) => {
   try {
-      const apiData = await fetchBusRoutes();
-      res.render('busRoutesPage', { routes: apiData });
+      const routesData = await fetchBusRoutes();
+      const { username, loggedIn, userId } = req.session; // Assuming you store these in the session
+      res.render('routes/allroutes', { routes: routesData, username, loggedIn, userId });
   } catch (error) {
-      console.error("Error in /routes/allroutes:", error);
       res.status(500).send('Error fetching bus routes');
   }
 });
-
 //OAuth Routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}))
 
