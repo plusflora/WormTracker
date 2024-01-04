@@ -3,11 +3,11 @@
 
 <h1>Placeholder</h1>
 
-<div class="container">
+<div class="container text-center">
   <h1>Bus Routes</h1>
-  <ul>
+  <ul class="list-unstyled">
     <% routes.forEach(route => { %>
-        <li><%= route.name %> (ID: <%= route.id %>)</li>
+      <li><%= route.id %> : <%= route.name %> </li>
     <% }); %>
   </ul>
 </div>
