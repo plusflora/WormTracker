@@ -9,7 +9,7 @@ async function fetchEtasForStop(stopId) {
     // console.log("Full API Response:", response.data); // Log the full API response
 
     const responseTimestamp = new Date(response.data.ServiceDelivery.ResponseTimestamp);
-    console.log("Response Timestamp:", responseTimestamp);
+    // console.log("Response Timestamp:", responseTimestamp);
 
     const monitoredStopVisits = response.data.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit;
 
@@ -21,14 +21,17 @@ async function fetchEtasForStop(stopId) {
 
       // Iterate through the MonitoredStopVisit array and calculate ETAs
       const etas = data.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.map(visit => {
-          const expectedArrivalTimeStr = visit.MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime;
-          const expectedArrivalTime = new Date(expectedArrivalTimeStr);
-
-          // Calculate ETA in milliseconds and convert to minutes
-          const etaMilliseconds = expectedArrivalTime - responseTimestamp;
-          return Math.floor(etaMilliseconds / 60000); // Convert to minutes
-      });
-      console.log(etas)
+        const expectedArrivalTimeStr = visit.MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime;
+        const expectedArrivalTime = new Date(expectedArrivalTimeStr);
+    
+        // Calculate ETA in milliseconds and convert to minutes
+        const etaMilliseconds = expectedArrivalTime - responseTimestamp;
+        const etaMinutes = Math.floor(etaMilliseconds / 60000); // Convert to minutes
+    
+        // If ETA is less than a minute, return "Arriving"
+        return etaMinutes < 1 ? "Arriving" : etaMinutes + " minutes";
+    });
+      // console.log(etas)
       // Return the ETAs
       return etas;
   } catch (error) {
