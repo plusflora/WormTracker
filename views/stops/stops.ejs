@@ -3,9 +3,13 @@
 <h1>Stops for Route: <%= routeId %></h1>
 
 <ul>
-    <% stops.forEach(stop => { %>
-        <li><%= stop.name %> (ID: <%= stop.id %>)</li>
-    <% }) %>
+    <% if (stops && stops.length > 0) { %>
+        <% stops.forEach(stop => { %>
+            <li><%= stop.name %>: <%= stop.id %></li>
+        <% }) %>
+    <% } else { %>
+        <li>No stops available</li>
+    <% } %>
 </ul>
 
 <%- include('../partials/footer') %>

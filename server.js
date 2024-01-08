@@ -17,6 +17,7 @@ const axios = require('axios')
 const UserRouter = require('./controllers/userControllers')
 
 const fetchBusRoutes = require('./utes/busRoutes')
+const fetchStopsForRoute = require('./utes/stops')
 
 //////////////////////////////////////////////////
 //create the app object and set up the view engine
@@ -71,12 +72,16 @@ app.get('/routes/allroutes', async (req, res) => {
 
 //dynamic page route with all stops per route. so I don't have to make 600k pages
 app.get('/stops/:routeId', async (req, res) => {
+  const routeId = req.params.routeId;
+  const { username, loggedIn, userId } = req.session; // Extract session variables
+
   try {
-      const routeId = req.params.routeId;
-      const stops = await fetchStopsForRoute(routeId); // Fetch stops based on routeId
-      res.render('stops', { stops, routeId }); // Render the same template with the fetched data
+    const stops = await fetchStopsForRoute(routeId);
+    res.render('stops/stops', { stops: stops, routeId: routeId, username, loggedIn, userId });
   } catch (error) {
-      res.status(500).send('Error fetching stops for route');
+    console.error(error);
+    // Pass the session variables even in the case of an error
+    res.status(500).render('errorPage', { username, loggedIn, userId, error: 'Error fetching stops' });
   }
 });
 
@@ -88,6 +93,7 @@ app.get('/auth/google/callback', passport.authenticate('google', {failureRedirec
 function(req, res) {
   res.redirect('/')
 })
+
 /////////////////
 //server listener
 const PORT = process.env.PORT
