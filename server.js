@@ -18,6 +18,7 @@ const UserRouter = require('./controllers/userControllers')
 
 const fetchBusRoutes = require('./utes/busRoutes')
 const fetchStopsForRoute = require('./utes/stops')
+const fetchEtasForStop = require('./utes/etaBuilder')
 
 
 //////////////////////////////////////////////////
@@ -87,16 +88,24 @@ app.get('/stops/:routeId', async (req, res) => {
 
 //page for etas
 app.get('/stopPage/:stopId', async (req, res) => {
+  const { username, loggedIn, userId } = req.session;
+
   try {
+      // Validate the stopId parameter
       const stopId = req.params.stopId;
-      const etas = await fetchEtasForStop(stopId); 
-    res.render('etas', { etas, stopId
-    }); 
+      if (!stopId) {
+          throw new Error("Invalid stop ID");
+      }
+
+      // Fetch ETAs
+      const etas = await fetchEtasForStop(stopId);
+      res.render('routes/eta', { etas, stopId, username, loggedIn, userId }); 
   } catch (error) {
-console.error(error);
-res.status(500).send("Error fetching ETAs for stop");
-}
+      console.error("Error in /stopPage/:stopId:", error);
+      res.status(500).render('errorPage', { username, loggedIn, userId, error: 'Error fetching stops', errorMessage: error.message });
+  }
 });
+
 //OAuth Routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}))
 

@@ -1,5 +1,18 @@
 <%- include('../partials/header') %>
+<div class="container text-center">
+<h1>ETAs for Stop ID: <%= stopId %></h1>
 
-
-
+<% if (etas && etas.length > 0) { %>
+    <ul>
+        <% etas.forEach(eta => { %>
+            <li class="list-unstyled">
+                <p>ETA: <%= eta %> minutes</p>
+                
+            </li>
+        <% }) %>
+    </ul>
+<% } else { %>
+    <p>No ETAs available for this stop.</p>
+<% } %>
+</div>
 <%- include('../partials/footer') %>
