@@ -68,6 +68,19 @@ app.get('/routes/allroutes', async (req, res) => {
       res.status(500).send('Error fetching bus routes');
   }
 });
+
+//dynamic page route with all stops per route. so I don't have to make 600k pages
+app.get('/stops/:routeId', async (req, res) => {
+  try {
+      const routeId = req.params.routeId;
+      const stops = await fetchStopsForRoute(routeId); // Fetch stops based on routeId
+      res.render('stops', { stops, routeId }); // Render the same template with the fetched data
+  } catch (error) {
+      res.status(500).send('Error fetching stops for route');
+  }
+});
+
+
 //OAuth Routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}))
 

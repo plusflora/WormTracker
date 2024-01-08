@@ -1,15 +1,17 @@
 <%- include('../partials/header') %>
 
-
-<h1>Placeholder</h1>
-
 <div class="container text-center">
   <h1>Bus Routes</h1>
-  <ul class="list-unstyled">
-    <% routes.forEach(route => { %>
-      <li><%= route.id %> : <%= route.name %> </li>
-    <% }); %>
-  </ul>
+  <% routes.forEach(route => { %>
+    <li class="list-unstyled">
+        <a href="/stops/<%= route.id %>" class="btn btn-primary" data-route-id="<%= route.id %>">
+            <%= route.id %>: <%= route.name %> 
+        </a>
+    </li>
+<% }); %>
+
 </div>
 
 <%- include('../partials/footer') %>
+
+<script src="utes/clientsideRoutes.js"></script>

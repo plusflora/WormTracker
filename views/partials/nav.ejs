@@ -9,10 +9,10 @@
       <% } %>
       <div id="navbarNav" class="collapse navbar-collapse me-3">
         <% if (loggedIn) { %>
-          <a href="../routes/routes.ejs" class="nav-link text-light me-3">Routes</a>
+          <a href="../routes/allroutes" class="nav-link text-light me-3">Routes</a>
           <a href="/users/logout" class="nav-link text-light me-3">Log Out</a>
         <% } else { %>
-          <a href="/routes" class="nav-link text-light me-3">Routes</a>
+          <a href="../routes/allroutes" class="nav-link text-light me-3">Routes</a>
           <a href="/users/login" class="nav-link text-light me-3">Log In</a>
           <a href="/users/signup" class="nav-link text-light me-3">Sign Up</a>
         <% } %>

@@ -1,0 +1,11 @@
+<%- include('../partials/header') %>
+
+<h1>Stops for Route: <%= routeId %></h1>
+
+<ul>
+    <% stops.forEach(stop => { %>
+        <li><%= stop.name %> (ID: <%= stop.id %>)</li>
+    <% }) %>
+</ul>
+
+<%- include('../partials/footer') %>

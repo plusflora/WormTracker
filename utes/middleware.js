@@ -17,7 +17,7 @@ require('../config/passport')
 const middleware = (app) => {
   app.use(methodOverride('_method'))
   app.use(morgan('tiny'))
-  app.use(express.static('public'))
+  app.use(express.static('utes'))
   app.use(express.json())
   
   app.use(
