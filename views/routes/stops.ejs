@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<div class="container text-center">
+<h1>Stops for Route: <%= routeId %></h1>
+
+<ul>
+    <% if (stops && stops.length > 0) { %>
+        <% stops.forEach(stop => { %>
+            <li class="list-unstyled">
+                <!-- Using a button or a link to redirect to the stop's page -->
+                <!-- Adjust '/stopPage/' to the appropriate route in your application -->
+                <a href="/stopPage/<%= stop.id %>" class="btn btn-primary">
+                    <%= stop.name %> (ID: <%= stop.id %>)
+                </a>
+            </li>
+        <% }) %>
+    <% } else { %>
+        <li>No stops available</li>
+    <% } %>
+</ul>
+</div>
+<%- include('../partials/footer') %>
+

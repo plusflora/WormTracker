@@ -19,6 +19,7 @@ const UserRouter = require('./controllers/userControllers')
 const fetchBusRoutes = require('./utes/busRoutes')
 const fetchStopsForRoute = require('./utes/stops')
 
+
 //////////////////////////////////////////////////
 //create the app object and set up the view engine
 const app = express()
@@ -36,7 +37,6 @@ app.use(express.urlencoded({ extended: true })); // This needs to be before your
 ////////////
 //middleware
 middleware(app)
-
 
 
 require('./config/passport')
@@ -77,7 +77,7 @@ app.get('/stops/:routeId', async (req, res) => {
 
   try {
     const stops = await fetchStopsForRoute(routeId);
-    res.render('stops/stops', { stops: stops, routeId: routeId, username, loggedIn, userId });
+    res.render('routes/stops', { stops: stops, routeId: routeId, username, loggedIn, userId });
   } catch (error) {
     console.error(error);
     // Pass the session variables even in the case of an error
@@ -85,7 +85,18 @@ app.get('/stops/:routeId', async (req, res) => {
   }
 });
 
-
+//page for etas
+app.get('/stopPage/:stopId', async (req, res) => {
+  try {
+      const stopId = req.params.stopId;
+      const etas = await fetchEtasForStop(stopId); 
+    res.render('etas', { etas, stopId
+    }); 
+  } catch (error) {
+console.error(error);
+res.status(500).send("Error fetching ETAs for stop");
+}
+});
 //OAuth Routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}))
 
