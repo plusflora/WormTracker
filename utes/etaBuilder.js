@@ -6,10 +6,9 @@ async function fetchEtasForStop(stopId) {
   try {
     const response = await axios.get(apiUrl);
     const data = response.data
-    // console.log("Full API Response:", response.data); // Log the full API response
+
 
     const responseTimestamp = new Date(response.data.ServiceDelivery.ResponseTimestamp);
-    // console.log("Response Timestamp:", responseTimestamp);
 
     const monitoredStopVisits = response.data.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit;
 
@@ -31,7 +30,6 @@ async function fetchEtasForStop(stopId) {
         // If ETA is less than a minute, return "Arriving"
         return etaMinutes < 1 ? "Arriving" : etaMinutes + " minutes";
     });
-      // console.log(etas)
       // Return the ETAs
       return etas;
   } catch (error) {
